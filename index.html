@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="description" content="Концепт вознаграждения проектного блока: оклад, выполнение и процент от проекта.">
+</head>
+<body>
+<title>Три источника дохода</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Oswald:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --paper:#ECEEF1; --surface:#F8F9FB; --surface-2:#E1E5EB; --line:#C6CDD7; --line-soft:#D9DEE6;
+  --ink:#131A22; --ink-2:#56616F; --ink-3:#7C8896;
+  --blue:#1B4B8F; --blue-2:#3D74C4; --blue-soft:#DBE5F4; --blue-ghost:#EDF2FA;
+  --amber:#A96A02; --amber-soft:#F4E7CE;
+  --green:#2C6A4B; --red:#A33224;
+  --grid:rgba(27,75,143,.09);
+  --shadow:0 1px 2px rgba(19,26,34,.06), 0 8px 24px -16px rgba(19,26,34,.18);
+  --r:3px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E141A; --surface:#161D25; --surface-2:#1D2630; --line:#2E3945; --line-soft:#242E39;
+    --ink:#E7ECF2; --ink-2:#A0ADBB; --ink-3:#7B8895;
+    --blue:#6FA5E8; --blue-2:#4E86CC; --blue-soft:#1A2B41; --blue-ghost:#141E2A;
+    --amber:#E0A93F; --amber-soft:#33280F;
+    --green:#5FBE8C; --red:#E0705E;
+    --grid:rgba(111,165,232,.10);
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -18px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E141A; --surface:#161D25; --surface-2:#1D2630; --line:#2E3945; --line-soft:#242E39;
+  --ink:#E7ECF2; --ink-2:#A0ADBB; --ink-3:#7B8895;
+  --blue:#6FA5E8; --blue-2:#4E86CC; --blue-soft:#1A2B41; --blue-ghost:#141E2A;
+  --amber:#E0A93F; --amber-soft:#33280F;
+  --green:#5FBE8C; --red:#E0705E;
+  --grid:rgba(111,165,232,.10);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -18px rgba(0,0,0,.8);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Golos Text","Helvetica Neue",Arial,sans-serif;
+  font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1120px; margin:0 auto; padding:0 24px}
+h1,h2,h3{font-family:"Oswald","Arial Narrow",Arial,sans-serif; font-weight:500; text-wrap:balance; margin:0}
+h1{font-size:clamp(38px,6.4vw,68px); line-height:1.02; letter-spacing:.005em; text-transform:uppercase}
+h2{font-size:clamp(25px,3.4vw,36px); line-height:1.1; text-transform:uppercase; letter-spacing:.01em}
+h3{font-size:19px; line-height:1.25; letter-spacing:.01em}
+p{margin:0}
+.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--blue); font-weight:500;
+}
+.lead{font-size:clamp(17px,1.9vw,20px); line-height:1.55; color:var(--ink-2); max-width:62ch}
+.small{font-size:14px; color:var(--ink-2)}
+.tiny{font-size:12.5px; color:var(--ink-3); line-height:1.5}
+.num{font-variant-numeric:tabular-nums}
+
+/* ————— hero ————— */
+.hero{
+  position:relative; overflow:hidden; border-bottom:1px solid var(--line);
+  background:
+    linear-gradient(180deg, var(--blue-ghost), var(--paper) 78%),
+    repeating-linear-gradient(0deg, var(--grid) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(90deg, var(--grid) 0 1px, transparent 1px 28px);
+}
+.hero-inner{padding:clamp(48px,8vw,104px) 0 clamp(40px,5vw,64px); display:grid; gap:26px}
+.hero h1 span{color:var(--blue)}
+.hero-meta{
+  display:flex; flex-wrap:wrap; gap:10px 28px; padding-top:8px;
+  border-top:1px solid var(--line); font-size:12.5px; color:var(--ink-3);
+  font-family:"IBM Plex Mono",monospace;
+}
+.hero-formula{
+  display:flex; flex-wrap:wrap; align-items:center; gap:10px;
+  font-family:"Oswald",sans-serif; font-size:clamp(15px,2vw,21px); text-transform:uppercase; letter-spacing:.02em;
+}
+.hero-formula b{font-weight:500; padding:5px 12px; border:1px solid var(--line); border-radius:var(--r); background:var(--surface)}
+.hero-formula b.b1{border-color:var(--blue); color:var(--blue)}
+.hero-formula b.b2{border-color:var(--amber); color:var(--amber)}
+.hero-formula b.b3{border-color:var(--green); color:var(--green)}
+.hero-formula i{font-style:normal; color:var(--ink-3)}
+
+/* ————— sections ————— */
+section{padding:clamp(52px,7vw,88px) 0; border-bottom:1px solid var(--line-soft)}
+.sec-head{display:grid; gap:14px; margin-bottom:34px; max-width:70ch}
+.grid-3{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px}
+.grid-2{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px}
+
+.card{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+  padding:22px; display:grid; gap:12px; align-content:start; box-shadow:var(--shadow);
+}
+.card .kicker{display:flex; align-items:baseline; justify-content:space-between; gap:12px}
+.card .big{font-family:"Oswald",sans-serif; font-size:34px; line-height:1; font-weight:500}
+.c-blue .big{color:var(--blue)} .c-amber .big{color:var(--amber)} .c-green .big{color:var(--green)}
+.card ul{margin:0; padding-left:18px; display:grid; gap:6px; font-size:14.5px; color:var(--ink-2)}
+
+.tag{
+  display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.08em;
+  text-transform:uppercase; padding:3px 8px; border-radius:2px; background:var(--blue-soft); color:var(--blue);
+}
+.tag.amber{background:var(--amber-soft); color:var(--amber)}
+
+/* ————— tables ————— */
+.tw{overflow-x:auto; border:1px solid var(--line); border-radius:var(--r); background:var(--surface)}
+table{border-collapse:collapse; width:100%; min-width:720px; font-size:14.5px}
+th,td{padding:11px 14px; text-align:left; border-bottom:1px solid var(--line-soft); vertical-align:top}
+thead th{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:500; background:var(--surface-2); border-bottom:1px solid var(--line);
+}
+tbody tr:last-child td{border-bottom:none}
+td.role{font-weight:600; white-space:nowrap}
+td.n{text-align:right; font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; white-space:nowrap}
+.dot{display:inline-block; width:9px; height:9px; border-radius:50%}
+.dot.a{background:var(--blue)} .dot.c{background:var(--blue); opacity:.32}
+td.mx{text-align:center}
+.rowlabel{max-width:38ch}
+
+/* ————— chart ————— */
+.panel{border:1px solid var(--line); border-radius:var(--r); background:var(--surface); box-shadow:var(--shadow)}
+.panel-head{
+  display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between;
+  padding:16px 18px; border-bottom:1px solid var(--line-soft);
+}
+.tabs{display:flex; flex-wrap:wrap; gap:6px}
+.tabs button{
+  font-family:"IBM Plex Mono",monospace; font-size:12px; letter-spacing:.04em; text-transform:uppercase;
+  padding:7px 12px; border:1px solid var(--line); background:transparent; color:var(--ink-2);
+  border-radius:2px; cursor:pointer; transition:background .15s, color .15s, border-color .15s;
+}
+.tabs button:hover{border-color:var(--blue-2); color:var(--ink)}
+.tabs button[aria-selected="true"]{background:var(--blue); border-color:var(--blue); color:var(--paper)}
+.tabs button:focus-visible, input:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
+
+.slider-row{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+.slider-row label{font-size:12.5px; color:var(--ink-2); font-family:"IBM Plex Mono",monospace}
+input[type=range]{accent-color:var(--blue); width:180px}
+.readout{font-family:"Oswald",sans-serif; font-size:22px; color:var(--blue); font-variant-numeric:tabular-nums}
+
+.chart-body{padding:18px; overflow-x:auto}
+.chart-body svg{display:block; min-width:660px; width:100%; height:auto}
+.legend{display:flex; flex-wrap:wrap; gap:16px; padding:0 18px 16px; font-size:12.5px; color:var(--ink-2)}
+.legend i{display:inline-block; width:12px; height:12px; margin-right:6px; vertical-align:-1px; border-radius:2px}
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); border-top:1px solid var(--line-soft)}
+.stat{padding:14px 18px; border-right:1px solid var(--line-soft)}
+.stat:last-child{border-right:none}
+.stat .k{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-3)}
+.stat .v{font-family:"Oswald",sans-serif; font-size:26px; line-height:1.2; font-variant-numeric:tabular-nums}
+
+/* ————— steps ————— */
+.steps{display:grid; gap:0; border-left:2px solid var(--line)}
+.step{padding:0 0 30px 26px; position:relative}
+.step:last-child{padding-bottom:0}
+.step::before{
+  content:""; position:absolute; left:-7px; top:6px; width:12px; height:12px; border-radius:50%;
+  background:var(--paper); border:2px solid var(--blue);
+}
+.step.filled::before{background:var(--blue)}
+.step .st{font-family:"IBM Plex Mono",monospace; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3)}
+.step h3{margin:4px 0 8px}
+.step p{font-size:14.5px; color:var(--ink-2); max-width:64ch}
+
+.note{
+  border-left:3px solid var(--amber); background:var(--amber-soft); padding:14px 18px;
+  border-radius:0 var(--r) var(--r) 0; font-size:14.5px; color:var(--ink);
+}
+.check{list-style:none; padding:0; margin:0; display:grid; gap:2px}
+.check li{
+  display:flex; gap:12px; padding:12px 0; border-bottom:1px solid var(--line-soft); font-size:15px;
+}
+.check li:last-child{border-bottom:none}
+.check .no{font-family:"IBM Plex Mono",monospace; color:var(--blue); font-size:13px; padding-top:2px; min-width:24px}
+footer{padding:44px 0 64px; color:var(--ink-3); font-size:13px; display:grid; gap:10px}
+footer b{color:var(--ink-2); font-weight:600}
+@media (max-width:640px){
+  .stat{border-right:none; border-bottom:1px solid var(--line-soft)}
+  .hero-formula{font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important; animation:none !important}}
+</style>
+
+<div class="hero">
+  <div class="wrap hero-inner">
+    <div class="eyebrow">Атриум · проектный блок · концепт вознаграждения</div>
+    <h1>Три источника<br><span>дохода</span></h1>
+    <p class="lead">Оклад платит за присутствие в роли. Выполнение платит за то, что человек сделал сам. Проект платит за деньги, которые компания получила. Каждый сотрудник видит свой год вперёд: где будет пик, где провал и что нужно закрыть, чтобы провала не случилось.</p>
+    <div class="hero-formula">
+      <b class="b1">Оклад</b><i>+</i><b class="b2">Выполнение</b><i>+</i><b class="b3">% от проекта</b><i>=</i><span class="mono" style="font-size:15px;color:var(--ink-2)">доход месяца</span>
+    </div>
+    <div class="hero-meta">
+      <span>Источник: рабочие листы 26.08.2026</span>
+      <span>Сценарий портфеля: 460 млн ₽ / 12 мес.</span>
+      <span>Статус: проект для обсуждения</span>
+    </div>
+  </div>
+</div>
+
+<section id="princip">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Принцип</div>
+      <h2>Три части, которые нельзя смешивать</h2>
+      <p class="small">Разные части оплачивают разное поведение и включаются в разное время. Если слить их в одну сумму, человек перестаёт понимать, за что именно ему заплатили, и работает «на глазок».</p>
+    </div>
+    <div class="grid-3">
+      <div class="card c-blue">
+        <div class="kicker"><h3>Оклад</h3><span class="big">Фикс</span></div>
+        <p class="small">Платится за то, что роль занята и постоянные функции выполняются. Не зависит от проекта и не обнуляется.</p>
+        <ul>
+          <li>Выплата ежемесячно, без условий</li>
+          <li>Это база, а не «аванс премии»</li>
+          <li>Компенсации — замеры, выезды, ГСМ — отдельным правилом, не внутри оклада</li>
+        </ul>
+      </div>
+      <div class="card c-amber">
+        <div class="kicker"><h3>Выполнение</h3><span class="big">Месяц</span></div>
+        <p class="small">Платится за конкретный измеримый результат периода, который человек контролирует лично.</p>
+        <ul>
+          <li>1–3 показателя на роль, не больше</li>
+          <li>Считается ежемесячно, выплата по итогам квартала</li>
+          <li>Включается с первого дня — это то, чему компания учит людей</li>
+        </ul>
+      </div>
+      <div class="card c-green">
+        <div class="kicker"><h3>Процент от проекта</h3><span class="big">Год</span></div>
+        <p class="small">Платится за деньги, которые компания фактически получила по проекту. Это часть, ради которой человек остаётся в компании на длинную дистанцию.</p>
+        <ul>
+          <li>База — сумма договора либо валовая прибыль проекта</li>
+          <li>25% доли — при подписании и авансе, 50% — по ходу исполнения, 25% — при закрытии</li>
+          <li>Стоп-факторы обнуляют долю по конкретному проекту, а не оклад</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note" style="margin-top:20px">
+      <b>Правило перехода.</b> В первом квартале компания платит только за оклад и выполнение, а прибыль по каждому проекту показывает людям открыто, не платя за неё. Процент включается, когда управленческий учёт закрывает месяц за 5 рабочих дней и по 3–5 проектам факт сверен с планом. Иначе спор о цифрах начнётся в первую же выплату.
+    </div>
+  </div>
+</section>
+
+<section id="dva-tipa">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">База процента</div>
+      <h2>Свой проект и проект компании — разные ставки</h2>
+      <p class="small">Проект, который человек нашёл и привёл сам, стоит дороже проекта, который ему передала компания. Иначе выгоднее сидеть на потоке и ничего не искать.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <span class="tag">Свой проект — с рынка</span>
+        <div class="kicker"><h3>МОП привёл сам</h3><span class="big" style="color:var(--blue)">1,0%</span></div>
+        <p class="small">От суммы договора без НДС. Человек нашёл заказчика, провёл его через квалификацию, расчёт, макап и договор. Компания дала ему производство и исполнение, но не дала клиента.</p>
+      </div>
+      <div class="card">
+        <span class="tag amber">Стратегический — дала компания</span>
+        <div class="kicker"><h3>Проект передан</h3><span class="big" style="color:var(--amber)">0,3%</span></div>
+        <p class="small">От суммы договора без НДС. Клиент пришёл через собственника, партнёрство или репутацию компании. Работа по сопровождению остаётся, но заслуга в привлечении — не сотрудника.</p>
+      </div>
+    </div>
+    <div class="grid-2" style="margin-top:18px">
+      <div class="card">
+        <span class="tag">Ведение проекта</span>
+        <div class="kicker"><h3>РП ведёт объект</h3><span class="big" style="color:var(--blue)">0,5%</span></div>
+        <p class="small">От суммы каждого договора без НДС, который он довёл до закрытия документами и деньгами. Если РП сам привёл проект или сделал допродажу на своём объекте — по этой сумме действует ставка владельца сделки 1,0%. Управленческий процент на ту же сумму сверху не начисляется.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Портфель, а не сделка</span>
+        <div class="kicker"><h3>Сметчик</h3><span class="big" style="color:var(--blue)">0,5%</span></div>
+        <p class="small">От валовой прибыли всех проектов, закрытых за квартал. Сметчик не должен быть заинтересован в конкретной сделке — иначе он подгонит расчёт под желаемую цену.</p>
+      </div>
+    </div>
+    <div class="note" style="margin-top:20px">
+      <b>Порог расчёта — 40%.</b> Сметчик считает проект с целевой валовой маржой не ниже 40% к сумме договора без НДС. Расчёт с меньшей маржой не выходит в КП и не идёт в договор без отдельного акцепта собственника. Это же число — база квартальной премии сметчика и всей экономики проектной команды: проценты ролей рассчитаны от портфеля, который держит этот порог.
+    </div>
+  </div>
+</section>
+
+<section id="god">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Год в кубиках</div>
+      <h2>Как доход собирается из проектов</h2>
+      <p class="small">Каждый столбец — месяц. Тёмная часть — оклад, он не меняется. Светлые кубики сверху — выплаты по конкретным проектам: за подписание, за ход исполнения, за закрытие. Пунктир — медиана года. Провалы видны заранее — это и есть повод искать следующий проект сейчас, а не в месяце провала.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div class="tabs" role="tablist" aria-label="Роль">
+          <button role="tab" data-role="mop" aria-selected="true">МОП</button>
+          <button role="tab" data-role="rp" aria-selected="false">РП</button>
+          <button role="tab" data-role="smet" aria-selected="false">Сметчик</button>
+          <button role="tab" data-role="mont" aria-selected="false">Нач. монтажа</button>
+          <button role="tab" data-role="pto" aria-selected="false">ПТО</button>
+        </div>
+        <div class="slider-row">
+          <label for="pf">Портфель команды, млн ₽</label>
+          <input type="range" id="pf" min="200" max="700" step="20" value="460">
+          <span class="readout num" id="pfOut">460</span>
+        </div>
+      </div>
+      <div class="chart-body"><svg id="chart" viewBox="0 0 900 380" role="img" aria-label="Доход по месяцам"></svg></div>
+      <div class="legend">
+        <span><i style="background:var(--blue)"></i>Оклад</span>
+        <span><i style="background:var(--blue-2)"></i>Выплата за подписание и аванс</span>
+        <span><i style="background:var(--amber)"></i>Выплата по ходу исполнения</span>
+        <span><i style="background:var(--green)"></i>Выплата за закрытие проекта</span>
+        <span><i style="background:var(--ink-3)"></i>Медиана года</span>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="k">За год</div><div class="v num" id="sYear">—</div></div>
+        <div class="stat"><div class="k">Медиана месяца</div><div class="v num" id="sMed">—</div></div>
+        <div class="stat"><div class="k">Худший месяц</div><div class="v num" id="sMin">—</div></div>
+        <div class="stat"><div class="k">Лучший месяц</div><div class="v num" id="sMax">—</div></div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:18px">
+      <div class="panel-head"><h3>Портфель команды: чем заняты месяцы</h3><span class="tiny">Условный сценарий из шести проектов. Суммы масштабируются ползунком выше.</span></div>
+      <div class="chart-body"><svg id="gantt" viewBox="0 0 900 250" role="img" aria-label="График проектов по месяцам"></svg></div>
+    </div>
+    <p class="tiny" style="margin-top:14px">Сценарий условный: объекты и суммы договоров взяты для иллюстрации механики и подлежат замене на фактический портфель. Проверяется здесь только форма кривой — где у роли пик, где провал и чем провал закрывается.</p>
+  </div>
+</section>
+
+<section id="stavki">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Ставки по ролям</div>
+      <h2>Девять позиций проектного блока</h2>
+      <p class="small">Оклады — ориентиры «на руки» из рабочего листа; до утверждения их нужно пересчитать в начисление с бухгалтерией и трудовым юристом. Проценты фиксируются после 5–10 закрытых проектов с достоверным план-фактом.</p>
+    </div>
+    <div class="tw">
+      <table>
+        <thead><tr>
+          <th>Роль</th><th class="n">Оклад, ₽/мес</th><th>За выполнение</th><th>За проект</th><th>Что обнуляет переменную часть</th>
+        </tr></thead>
+        <tbody>
+          <tr><td class="role">МОП</td><td class="n">100 000</td><td>Полный коммерческий контур по закреплённым сделкам, сроки расчётов и КП</td><td>1,0% от своего договора · 0,3% от стратегического</td><td class="rowlabel">Сделка ниже акцептованной маржи, договор без макапа, передача РП неполным комплектом</td></tr>
+          <tr><td class="role">РП</td><td class="n">200 000</td><td>Срок этапов, освоение бюджета по статьям, объём закрыт документами в срок</td><td>0,5% от каждого договора без НДС, доведённого до закрытия · 1,0% от проектов и допродаж, которые привёл сам</td><td class="rowlabel">Скрытый перерасход, подтверждение объёма без факта монтажа, платёж вне календаря</td></tr>
+          <tr><td class="role">Сметчик</td><td class="n">100 000</td><td>Срок выдачи расчётов, отклонение факта от плановой себестоимости</td><td>0,5% от валовой прибыли закрытых за квартал проектов</td><td class="rowlabel">Подгонка расчёта под желаемую цену, согласование сверки при известном расхождении</td></tr>
+          <tr><td class="role">Начальник монтажа</td><td class="n">100 000</td><td>Недельный объём, простои бригад по его вине, бюджет монтажа</td><td>До 50% оклада за выполнение месячного плана · 0,15% за сдачу объекта</td><td class="rowlabel">Недостоверный первичный факт, вывод бригады без фронта работ, скрытое нарушение безопасности</td></tr>
+          <tr><td class="role">ПТО</td><td class="n">200 000</td><td>Подготовка в срок, приёмка комплекта с первой подачи</td><td>0,02% от суммы договора за каждый принятый комплект КС/УПД</td><td class="rowlabel">Включение неподтверждённого объёма, дата задним числом</td></tr>
+          <tr><td class="role">Юрист</td><td class="n">оклад</td><td>Полнота карты разрывов, зеркальность обязательств субподряда, срок согласования</td><td>Квартальная премия за возвращённые и предотвращённые деньги по претензионной работе</td><td class="rowlabel">Согласование договора с неоценённым остаточным риском</td></tr>
+          <tr><td class="role">Финансовый контролёр</td><td class="n">оклад</td><td>Точность платёжного календаря, закрытие управленческого месяца за 5 дней</td><td>Квартальная премия за закрытый без расхождений период</td><td class="rowlabel">Расхождение управленческого и бухгалтерского учёта без объяснения</td></tr>
+          <tr><td class="role">Главный бухгалтер</td><td class="n">оклад</td><td>Своевременность и корректность налоговой отчётности</td><td>Квартальная премия при отсутствии штрафов и требований</td><td class="rowlabel">Штрафы и требования по вине учёта</td></tr>
+          <tr><td class="role">Администрация и маркетинг</td><td class="n">по факту</td><td>Задачи периода, согласованные бюджетом</td><td>Бюджет по факту выполненных работ, без процента от проектов</td><td class="rowlabel">Расход без согласованного бюджета задачи</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="komanda">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Экономика команды</div>
+      <h2>Одна проектная команда должна приносить прибыль</h2>
+      <p class="small">Пять человек — МОП, РП, сметчик, начальник монтажа, ПТО — работают как один экономический блок. Из портфеля вычитаются прямые расходы проектов, затем фиксированная и переменная часть самой команды. Остаток — вклад команды в прибыль компании, из которого оплачиваются юридический, финансовый и административный контуры.</p>
+    </div>
+    <div class="panel">
+      <div class="panel-head">
+        <h3>Из чего складывается вклад команды</h3>
+        <span class="tiny">Сценарий: портфель <span class="num" id="wfPf">460</span> млн ₽, целевая валовая маржа проекта 40%</span>
+      </div>
+      <div class="chart-body"><svg id="waterfall" viewBox="0 0 900 300" role="img" aria-label="Экономика проектной команды"></svg></div>
+      <div class="stats">
+        <div class="stat"><div class="k">Фикс команды за год</div><div class="v num" id="wFix">—</div></div>
+        <div class="stat"><div class="k">Переменная команды</div><div class="v num" id="wVar">—</div></div>
+        <div class="stat"><div class="k">Стоимость команды к выручке</div><div class="v num" id="wShare">—</div></div>
+        <div class="stat"><div class="k">Вклад в прибыль</div><div class="v num" id="wProfit">—</div></div>
+      </div>
+    </div>
+    <div class="note" style="margin-top:20px">
+      <b>Что это даёт компании.</b> Когда доход каждого человека собран из кубиков конкретных проектов, план по прибыли и план по движению денег — это один и тот же документ. Видно, в каком месяце заканчивается проект, в каком начинается следующий, и где команда станет убыточной, если продажа не закроется вовремя.
+    </div>
+  </div>
+</section>
+
+<section id="kpi">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">KPI проекта</div>
+      <h2>Пять вопросов к каждому закрытому проекту</h2>
+      <p class="small">Переменная часть выплачивается не за «хорошую работу», а за ответы на пять вопросов по конкретному объекту. У каждого вопроса один владелец результата — тот, чья доля падает, если ответ отрицательный. Остальные влияют на ответ, и их доля тоже корректируется, но не обнуляется.</p>
+    </div>
+    <div class="tw">
+      <table>
+        <thead><tr>
+          <th style="min-width:230px">Вопрос по проекту</th><th class="mx">МОП</th><th class="mx">РП</th><th class="mx">Сметчик</th><th class="mx">Нач. монтажа</th><th class="mx">ПТО</th><th class="mx">Юрист</th><th class="mx">Админ. корпус</th>
+        </tr></thead>
+        <tbody>
+          <tr><td class="rowlabel"><b>1.</b> Договор был сильный: риски переложены, платёжный график обеспечен</td>
+            <td class="mx"><span class="dot c"></span></td><td class="mx"><span class="dot c"></span></td><td class="mx"><span class="dot c"></span></td><td class="mx">—</td><td class="mx">—</td><td class="mx"><span class="dot a"></span></td><td class="mx"><span class="dot c"></span></td></tr>
+          <tr><td class="rowlabel"><b>2.</b> КП рассчитано правильно: фактическая себестоимость сошлась с плановой</td>
+            <td class="mx"><span class="dot c"></span></td><td class="mx"><span class="dot c"></span></td><td class="mx"><span class="dot a"></span></td><td class="mx"><span class="dot c"></span></td><td class="mx">—</td><td class="mx">—</td><td class="mx">—</td></tr>
+          <tr><td class="rowlabel"><b>3.</b> Выполнение шло по графику: этапы сданы в срок, простоев не было</td>
+            <td class="mx">—</td><td class="mx"><span class="dot a"></span></td><td class="mx">—</td><td class="mx"><span class="dot c"></span></td><td class="mx"><span class="dot c"></span></td><td class="mx">—</td><td class="mx"><span class="dot c"></span></td></tr>
+          <tr><td class="rowlabel"><b>4.</b> Расчёт прошёл по договору: документы закрыты, деньги получены в срок</td>
+            <td class="mx"><span class="dot c"></span></td><td class="mx"><span class="dot a"></span></td><td class="mx">—</td><td class="mx">—</td><td class="mx"><span class="dot c"></span></td><td class="mx"><span class="dot c"></span></td><td class="mx"><span class="dot c"></span></td></tr>
+          <tr><td class="rowlabel"><b>5.</b> Рекламации не съели маржу: дефекты закрыты в пределах бюджета</td>
+            <td class="mx">—</td><td class="mx"><span class="dot c"></span></td><td class="mx"><span class="dot c"></span></td><td class="mx"><span class="dot a"></span></td><td class="mx"><span class="dot c"></span></td><td class="mx">—</td><td class="mx">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tiny" style="margin-top:12px"><span class="dot a"></span> — владелец результата, его доля обнуляется при отрицательном ответе &nbsp;·&nbsp; <span class="dot c"></span> — влияет на результат, доля корректируется &nbsp;·&nbsp; — — не участвует и не отвечает</p>
+    <div class="note" style="margin-top:20px">
+      <b>Ранняя плохая новость не наказывается.</b> Отклонение, о котором человек сообщил в день, когда узнал о нём, не влияет на его переменную часть. Отклонение, которое обнаружили другие раньше, чем он сообщил, обнуляет период. Это единственный способ получать плохие новости вовремя, а не в момент, когда исправить уже нечего.
+    </div>
+  </div>
+</section>
+
+<section id="stupeni">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Порядок включения</div>
+      <h2>Сначала за выполнение, потом за прибыль</h2>
+      <p class="small">Если включить выполнение и прибыль одновременно, прибыль остаётся для людей абстракцией, на которую они не могут повлиять, — и они перестают стараться в обеих частях сразу. Поэтому части включаются по очереди.</p>
+    </div>
+    <div class="steps">
+      <div class="step filled">
+        <div class="st">Квартал 1 · включается сразу</div>
+        <h3>Оклад и выполнение</h3>
+        <p>Гарантированный уровень дохода на первый квартал плюс бонус за выполнение. Прибыль по каждому проекту считается и открыто показывается людям, но за неё не платят. Человек сначала видит связь между своими действиями и прибылью — и только потом получает за неё деньги.</p>
+      </div>
+      <div class="step">
+        <div class="st">Квартал 2–3 · при трёх условиях</div>
+        <h3>Добавляется процент от проекта</h3>
+        <p>Включается, когда управленческий учёт закрывает месяц за 5 рабочих дней, по 3–5 закрытым проектам факт сверен с планом и расхождения объяснены, а люди один полный квартал видели свою прибыль открыто. Если условия не выполнены — ступень переносится, а не включается «примерно».</p>
+      </div>
+      <div class="step">
+        <div class="st">Год 2 · для ключевых ролей</div>
+        <h3>Портфельная и годовая часть</h3>
+        <p>Годовая часть, привязанная к результату компании, а не отдельного проекта. Задача этой ступени — удержание ключевых людей на длинной дистанции, а не оплата текущей работы.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reshit">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">До запуска</div>
+      <h2>Что нужно утвердить, прежде чем говорить с людьми</h2>
+      <p class="small">Разговор о вознаграждении с каждым человеком собственник проводит лично и после того, как утверждена архитектура, а не до неё.</p>
+    </div>
+    <ul class="check">
+      <li><span class="no">01</span><span>Гарантированный уровень дохода каждого переходящего на первый квартал — до перевода людей.</span></li>
+      <li><span class="no">02</span><span>Суммы в начислении, а не «на руки», по каждой позиции — с бухгалтерией и трудовым юристом.</span></li>
+      <li><span class="no">03</span><span>База процента: сумма договора без НДС или валовая прибыль проекта. От выбора зависят все ставки в этом документе.</span></li>
+      <li><span class="no">04</span><span>Состав прямых расходов проектного P&amp;L — что именно вычитается до валовой прибыли.</span></li>
+      <li><span class="no">05</span><span>Правило компенсаций: замеры, выезды, работа в выходные, ГСМ, парковка — результат, ставка, подтверждение, лимит.</span></li>
+      <li><span class="no">06</span><span>Кто владеет какими первыми сделками и как фиксируется владелец в карточке до выпуска КП.</span></li>
+      <li><span class="no">07</span><span>Формат открытого показа прибыли людям — со второго месяца.</span></li>
+      <li><span class="no">08</span><span>Порядок юридического оформления премий и механизм зачёта авансовой части при снижении фактической прибыли.</span></li>
+    </ul>
+  </div>
+</section>
+
+<footer class="wrap">
+  <p><b>Источники.</b> Рабочие листы встречи от 26.08.2026 (таблица окладов и процентов, KPI-матрица, кривая дохода на 12 месяцев), комплект ГФД 2.0: «Мотивация — три ступени», «Роли, продукты и матрица ответственности», «Система сдержек и противовесов», «Черновик мотивации РОП и МОП — пилот 6 месяцев».</p>
+  <p><b>Статус документа.</b> Концепт для обсуждения собственниками. Не является офертой, локальным нормативным актом или расчётом заработной платы. Все суммы и проценты — ориентиры, подлежащие утверждению после появления достоверного план-факта по 5–10 закрытым проектам.</p>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var BASE = 460; // млн ₽ — базовый сценарий портфеля
+  var MARGIN = 0.40; // целевая валовая маржа проекта
+  var PROJECTS = [
+    {name:"Объект А", kind:"own",  sum:90,  sign:1, close:7},
+    {name:"Объект Б", kind:"str",  sum:60,  sign:1, close:5},
+    {name:"Объект В", kind:"str",  sum:75,  sign:3, close:9},
+    {name:"Объект Г", kind:"own",  sum:55,  sign:5, close:11},
+    {name:"Объект Д", kind:"str",  sum:110, sign:6, close:12},
+    {name:"Объект Е", kind:"own",  sum:70,  sign:8, close:12}
+  ];
+  var ROLES = {
+    mop:  {label:"МОП",            fix:100},
+    rp:   {label:"РП",             fix:200},
+    smet: {label:"Сметчик",        fix:100},
+    mont: {label:"Начальник монтажа", fix:100},
+    pto:  {label:"Инженер ПТО",    fix:200}
+  };
+  var state = {role:"mop", pf:BASE};
+
+  function fmt(n){ return Math.round(n).toLocaleString("ru-RU"); }
+  function scaled(){
+    var k = state.pf / BASE;
+    return PROJECTS.map(function(p){
+      var c = {}; for(var key in p) c[key] = p[key];
+      c.sum = p.sum * k; return c;
+    });
+  }
+  // доход роли по месяцам: массив из 12 объектов {fix, sign, exec, close}
+  function series(role){
+    var ps = scaled(), out = [];
+    for(var m=1;m<=12;m++) out.push({fix:ROLES[role].fix, sign:0, exec:0, close:0});
+    function share(p, rate){ return p.sum * 10 * rate; } // тыс. ₽ при ставке в %
+    ps.forEach(function(p){
+      var execMonths = [], i;
+      for(i=p.sign+1;i<=p.close-1;i++) execMonths.push(i);
+      if(!execMonths.length) execMonths = [p.close];
+
+      if(role==="mop"){
+        var rate = p.kind==="own" ? 1.0 : 0.3, tot = share(p, rate);
+        out[p.sign-1].sign += tot*0.25;
+        execMonths.forEach(function(m){ out[m-1].exec += tot*0.5/execMonths.length; });
+        out[p.close-1].close += tot*0.25;
+      } else if(role==="rp"){
+        var t2 = share(p, 0.5);
+        out[p.sign-1].sign += t2*0.25;
+        execMonths.forEach(function(m){ out[m-1].exec += t2*0.5/execMonths.length; });
+        out[p.close-1].close += t2*0.25;
+      } else if(role==="smet"){
+        // 0,5% от валовой прибыли закрытых проектов, выплата в конце квартала закрытия
+        var prem = p.sum*1000*MARGIN*0.005;
+        var qEnd = Math.ceil(p.close/3)*3;
+        out[Math.min(qEnd,12)-1].close += prem;
+      } else if(role==="mont"){
+        out[p.close-1].close += p.sum*1000*0.0015; // 0,15% за сдачу объекта
+      } else if(role==="pto"){
+        var perPack = Math.max(12, p.sum*1000*0.0002); // комплект КС/УПД
+        execMonths.forEach(function(m){ out[m-1].exec += perPack; });
+        out[p.close-1].close += 20; // исполнительная документация принята
+      }
+    });
+    if(role==="mont"){ // премия за выполнение месячного плана монтажа
+      for(var m=1;m<=12;m++){
+        var active = ps.some(function(p){ return m>p.sign && m<=p.close; });
+        if(active) out[m-1].exec += 50;
+      }
+    }
+    return out;
+  }
+  function totals(s){ return s.map(function(d){ return d.fix+d.sign+d.exec+d.close; }); }
+  function median(a){
+    var b = a.slice().sort(function(x,y){return x-y;});
+    return (b[5]+b[6])/2;
+  }
+
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function el(tag, attrs, text){
+    var n = document.createElementNS(SVGNS, tag);
+    for(var k in attrs) n.setAttribute(k, attrs[k]);
+    if(text !== undefined) n.textContent = text;
+    return n;
+  }
+  var LBL = {"font-family":"IBM Plex Mono, monospace","font-size":"11","fill":"var(--ink-3)"};
+  function attrs(base, extra){
+    var o={}; for(var k in base) o[k]=base[k]; for(var j in extra) o[j]=extra[j]; return o;
+  }
+
+  function drawChart(){
+    var svg = document.getElementById("chart");
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var s = series(state.role), tot = totals(s);
+    var L=62, R=18, T=26, B=42, W=900, H=380;
+    var pw = W-L-R, ph = H-T-B;
+    var max = Math.max.apply(null, tot)*1.12;
+    var step = Math.pow(10, Math.floor(Math.log(max)/Math.LN10))/2;
+    var top = Math.ceil(max/step)*step;
+    var y = function(v){ return T+ph - v/top*ph; };
+
+    for(var g=0; g<=4; g++){
+      var v = top/4*g;
+      svg.appendChild(el("line",{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:"var(--line-soft)","stroke-width":1}));
+      svg.appendChild(el("text", attrs(LBL,{x:L-10,y:y(v)+4,"text-anchor":"end"}), fmt(v)));
+    }
+    svg.appendChild(el("text", attrs(LBL,{x:L-10,y:T-10,"text-anchor":"end","fill":"var(--ink-3)"}), "тыс ₽"));
+
+    var gw = pw/12, bw = Math.min(46, gw*0.62);
+    var keys = [["fix","var(--blue)"],["sign","var(--blue-2)"],["exec","var(--amber)"],["close","var(--green)"]];
+    s.forEach(function(d,i){
+      var x = L + gw*i + (gw-bw)/2, acc = 0;
+      keys.forEach(function(k){
+        var v = d[k[0]]; if(v<=0.5) return;
+        var h = v/top*ph;
+        svg.appendChild(el("rect",{x:x, y:y(acc+v), width:bw, height:h, fill:k[1]}));
+        acc += v;
+      });
+      svg.appendChild(el("text", attrs(LBL,{x:x+bw/2, y:y(acc)-8, "text-anchor":"middle","fill":"var(--ink-2)","font-size":"11.5"}), fmt(tot[i])));
+      svg.appendChild(el("text", attrs(LBL,{x:x+bw/2, y:T+ph+18, "text-anchor":"middle"}), "М"+(i+1)));
+    });
+
+    var med = median(tot);
+    svg.appendChild(el("line",{x1:L,x2:W-R,y1:y(med),y2:y(med),stroke:"var(--ink-3)","stroke-width":1.5,"stroke-dasharray":"7 5"}));
+    svg.appendChild(el("text", attrs(LBL,{x:W-R, y:y(med)-8, "text-anchor":"end","fill":"var(--ink-2)"}), "медиана " + fmt(med) + " тыс ₽"));
+    svg.appendChild(el("line",{x1:L,x2:W-R,y1:T+ph,y2:T+ph,stroke:"var(--line)","stroke-width":1}));
+
+    var yearSum = tot.reduce(function(a,b){return a+b;},0);
+    document.getElementById("sYear").textContent = (Math.round(yearSum/100)/10).toLocaleString("ru-RU")+" млн";
+    document.getElementById("sMed").textContent  = fmt(med);
+    document.getElementById("sMin").textContent  = fmt(Math.min.apply(null,tot));
+    document.getElementById("sMax").textContent  = fmt(Math.max.apply(null,tot));
+  }
+
+  function drawGantt(){
+    var svg = document.getElementById("gantt");
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var ps = scaled(), L=18, R=18, T=28, B=26, W=900, H=250;
+    var pw = W-L-R, gw = pw/12, rowH = (H-T-B)/ps.length;
+    for(var m=0;m<=12;m++){
+      svg.appendChild(el("line",{x1:L+gw*m,x2:L+gw*m,y1:T-8,y2:H-B,stroke:"var(--line-soft)","stroke-width":1}));
+      if(m<12) svg.appendChild(el("text", attrs(LBL,{x:L+gw*m+gw/2, y:H-B+18, "text-anchor":"middle"}), "М"+(m+1)));
+    }
+    ps.forEach(function(p,i){
+      var x = L + gw*(p.sign-1), w = gw*(p.close-p.sign+1);
+      var yy = T + rowH*i + 4, h = rowH-12;
+      var color = p.kind==="own" ? "var(--blue)" : "var(--amber)";
+      svg.appendChild(el("rect",{x:x, y:yy, width:w, height:h, fill:color, opacity:0.16, rx:2}));
+      svg.appendChild(el("rect",{x:x, y:yy, width:3, height:h, fill:color}));
+      svg.appendChild(el("text",{x:x+12, y:yy+h/2+1, "font-family":"Golos Text, sans-serif","font-size":"13","font-weight":"600","fill":"var(--ink)"}, p.name));
+      svg.appendChild(el("text", attrs(LBL,{x:x+12, y:yy+h/2+16, "fill":"var(--ink-2)"}),
+        (p.kind==="own"?"свой · 1,0%":"стратегический · 0,3%") + "  ·  " + fmt(p.sum) + " млн ₽"));
+    });
+    svg.appendChild(el("text", attrs(LBL,{x:L, y:14, "fill":"var(--ink-3)"}), "подписание → закрытие документами и деньгами"));
+  }
+
+  function drawWaterfall(){
+    var svg = document.getElementById("waterfall");
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var rev = state.pf;
+    var gross = rev*MARGIN;
+    var direct = rev-gross;
+    var fixY = 0, varY = 0;
+    for(var r in ROLES){
+      fixY += ROLES[r].fix*12/1000; // млн
+      var s = series(r), t = totals(s);
+      varY += (t.reduce(function(a,b){return a+b;},0) - ROLES[r].fix*12)/1000;
+    }
+    var profit = gross - fixY - varY;
+    var steps = [
+      {l:"Портфель", v:rev, t:"total", c:"var(--blue-2)"},
+      {l:"Прямые расходы проектов", v:-direct, t:"neg", c:"var(--ink-3)"},
+      {l:"Валовая прибыль", v:gross, t:"total", c:"var(--blue)"},
+      {l:"Фикс команды", v:-fixY, t:"neg", c:"var(--amber)"},
+      {l:"Переменная команды", v:-varY, t:"neg", c:"var(--amber)"},
+      {l:"Вклад в прибыль", v:profit, t:"total", c:"var(--green)"}
+    ];
+    var L=52,R=18,T=24,B=54,W=900,H=300, pw=W-L-R, ph=H-T-B;
+    var top = rev*1.08, y=function(v){ return T+ph - v/top*ph; };
+    var gw = pw/steps.length, bw = Math.min(88, gw*0.56);
+    var acc = 0;
+    steps.forEach(function(st,i){
+      var x = L+gw*i+(gw-bw)/2, from, to;
+      if(st.t==="total"){ from=0; to=st.v; acc=st.v; }
+      else { from=acc+st.v; to=acc; acc=acc+st.v; }
+      var h = Math.max(2, Math.abs(y(to)-y(from)));
+      svg.appendChild(el("rect",{x:x, y:Math.min(y(to),y(from)), width:bw, height:h, fill:st.c, opacity: st.t==="total"?1:0.55, rx:1}));
+      svg.appendChild(el("text",{x:x+bw/2, y:Math.min(y(to),y(from))-9, "text-anchor":"middle","font-family":"Oswald, sans-serif","font-size":"17","fill":"var(--ink)"},
+        (st.t==="neg"?"−":"") + fmt(Math.abs(st.v)) + ""));
+      var words = st.l.split(" ");
+      words.forEach(function(w,j){
+        svg.appendChild(el("text", attrs(LBL,{x:x+bw/2, y:T+ph+18+j*13, "text-anchor":"middle"}), w));
+      });
+    });
+    svg.appendChild(el("line",{x1:L,x2:W-R,y1:T+ph,y2:T+ph,stroke:"var(--line)","stroke-width":1}));
+    svg.appendChild(el("text", attrs(LBL,{x:L, y:14}), "млн ₽ за 12 месяцев"));
+
+    document.getElementById("wFix").textContent = (Math.round(fixY*10)/10).toLocaleString("ru-RU") + " млн";
+    document.getElementById("wVar").textContent = (Math.round(varY*10)/10).toLocaleString("ru-RU") + " млн";
+    document.getElementById("wShare").textContent = (Math.round((fixY+varY)/rev*1000)/10).toLocaleString("ru-RU") + "%";
+    document.getElementById("wProfit").textContent = fmt(profit) + " млн";
+    document.getElementById("wfPf").textContent = fmt(rev);
+  }
+
+  function renderAll(){ drawChart(); drawGantt(); drawWaterfall(); }
+
+  document.querySelectorAll(".tabs button").forEach(function(b){
+    b.addEventListener("click", function(){
+      document.querySelectorAll(".tabs button").forEach(function(x){ x.setAttribute("aria-selected","false"); });
+      b.setAttribute("aria-selected","true");
+      state.role = b.dataset.role;
+      drawChart();
+    });
+  });
+  var pf = document.getElementById("pf");
+  pf.addEventListener("input", function(){
+    state.pf = +pf.value;
+    document.getElementById("pfOut").textContent = fmt(state.pf);
+    renderAll();
+  });
+  renderAll();
+})();
+</script>
+
+</body>
+</html>
